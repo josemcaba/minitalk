@@ -6,7 +6,7 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 18:06:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/20 01:58:33 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:56:27 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ void	end(int signal)
 
 int	main(int argc, char *argv[])
 {
-	st   sigaction sa1;
-	struct sigaction sa2;	
-	
 	(void)argv;
 	if (argc != 1)
 		return (ft_printf("Wrong number of parameter\n"), 0);

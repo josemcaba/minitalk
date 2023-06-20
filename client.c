@@ -6,12 +6,11 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/20 02:45:46 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/21 00:15:23 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include <signal.h>
+#include "minitalk.h"
 
 pid_t	get_pid(int argc, char *argv[])
 {

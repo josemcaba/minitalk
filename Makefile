@@ -6,7 +6,7 @@
 #    By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 01:47:42 by jocaball          #+#    #+#              #
-#    Updated: 2023/06/20 02:52:54 by jocaball         ###   ########.fr        #
+#    Updated: 2023/06/20 21:28:25 by jocaball         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SNAME_BONUS = server_bonus
 CNAME_BONUS = client_bonus
 
 SSRC = server.c
-CSRC = client.c
+CSRC = client.c ft_ctob.c
 
 SSRC_BONUS = server_bonus.c 
 CSRC_BONUS = client_bonus.c
