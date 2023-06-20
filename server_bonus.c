@@ -1,11 +1,11 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
+/*   Created: 2023/06/20 18:06:07 by jocaball          #+#    #+#             */
 /*   Updated: 2023/06/20 01:58:33 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -28,10 +28,18 @@ void	end(int signal)
 
 int	main(int argc, char *argv[])
 {
+	st   sigaction sa1;
+	struct sigaction sa2;	
+	
 	(void)argv;
 	if (argc != 1)
 		return (ft_printf("Wrong number of parameter\n"), 0);
 	ft_printf("PID: %d\n", getpid());
+	sigemptyset(&sa1.sa_mask);
+	sa1.sa_flags = SA_RESTART | SA_SIGINFO;
+	sa1.sa_action = receive;
+
+
 	signal(SIGUSR1, receive);
 	signal(SIGUSR2, end);
 	while (1)
