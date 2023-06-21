@@ -6,11 +6,29 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/21 00:15:23 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/21 02:23:47 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+void	send_null(pid_t pid)
+{
+	int	i;
+	int	err;
+
+	i = 0;
+	while (i++ < 8)
+	{
+		err = kill(pid, SIGUSR1);
+		if (err)
+		{
+			ft_printf("No signal was sent\n");
+			break ;
+		}
+		usleep(200);
+	}
+}
 
 pid_t	get_pid(int argc, char *argv[])
 {
@@ -35,20 +53,25 @@ int	main(int argc, char *argv[])
 	int		err;
 	pid_t	server_pid;
 	int		i;
+	char	*bits;
 
 	server_pid = get_pid(argc, argv);
+	bits = ft_ctob(argv[2]);
+	if (!bits)
+		return (0);
 	i = 0;
-	while (i++ < 5)
+	while (bits[i])
 	{
-		err = kill(server_pid, SIGUSR1);
+		if (bits[i] == '0')
+			err = kill(server_pid, SIGUSR1);
+		else
+			err = kill(server_pid, SIGUSR2);
 		if (err)
 			return (ft_printf("No signal was sent\n"), 0);
-		ft_printf("SIGUSR1 was sent\n");
-		usleep(10);
+		usleep(200);
+		i++;
 	}
-	err = kill(server_pid, SIGUSR2);
-	if (err)
-		return (ft_printf("No signal was sent\n"), 0);
-	ft_printf("SIGUSR2 was sent\n");
+	send_null(server_pid);
+	free(bits);
 	return (0);
 }
