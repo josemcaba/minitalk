@@ -43,7 +43,8 @@ SRC	= ft_isalpha.c		ft_isdigit.c			ft_isalnum.c		\
 	  pf_str_convert.c	pf_hex_convert.c		pf_int_convert.c	\
 	  pf_uint_convert.c	pf_flags_read.c			ft_htoa.c			\
 	  ft_uitoa.c		ft_putchar.c			ft_putstr.c			\
-	  get_next_line.c	get_next_line_utils.c	ft_atol.c
+	  get_next_line.c	get_next_line_utils.c	ft_atol.c			\
+	  ft_btoc.c			ft_ctob.c
 
 OBJ = $(SRC:%.c=%.o)
 

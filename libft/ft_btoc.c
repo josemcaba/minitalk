@@ -13,7 +13,7 @@
 // The ft_btoc() function converts the initial portion of the string pointed to
 // by bits (char of bits) to char representation.
 
-#include "minitalk.h"
+#include "libft.h"
 
 static void	ft_fillchars(char **chars, char *str)
 {

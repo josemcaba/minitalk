@@ -13,7 +13,7 @@
 // The ft_ctob() function converts the initial portion of the string pointed to
 // by chars to bits representation.
 
-#include "minitalk.h"
+#include "libft.h"
 
 static void	ft_fillbits(char **bits, unsigned char *str)
 {
