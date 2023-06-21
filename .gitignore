@@ -2,3 +2,6 @@
 .vscode
 client.dSYM
 server.dSYM
+libft/libft.a
+server
+client

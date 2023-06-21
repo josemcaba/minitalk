@@ -12,21 +12,30 @@
 
 #include "minitalk.h"
 
-void	send_null(pid_t pid)
+void	send_chars(pid_t pid, unsigned char *str)
 {
-	int	i;
 	int	err;
+	int	i;
 
-	i = 0;
-	while (i++ < 8)
+	while (*str)
 	{
-		err = kill(pid, SIGUSR1);
-		if (err)
+		i = 0;
+		while (i < 8)
 		{
-			ft_printf("No signal was sent\n");
-			break ;
+			if (*str & 0x80)
+				err = kill(pid, SIGUSR2);
+			else
+				err = kill(pid, SIGUSR1);
+			if (err)
+			{
+				ft_printf("No signal was sent\n");
+				exit (0);
+			}
+			usleep(200);
+			*str = *str << 1;
+			i++;
 		}
-		usleep(200);
+		str++;
 	}
 }
 
@@ -50,28 +59,9 @@ pid_t	get_pid(int argc, char *argv[])
 
 int	main(int argc, char *argv[])
 {
-	int		err;
 	pid_t	server_pid;
-	int		i;
-	char	*bits;
 
 	server_pid = get_pid(argc, argv);
-	bits = ft_ctob(argv[2]);
-	if (!bits)
-		return (0);
-	i = 0;
-	while (bits[i])
-	{
-		if (bits[i] == '0')
-			err = kill(server_pid, SIGUSR1);
-		else
-			err = kill(server_pid, SIGUSR2);
-		if (err)
-			return (ft_printf("No signal was sent\n"), 0);
-		usleep(200);
-		i++;
-	}
-	send_null(server_pid);
-	free(bits);
+	send_chars(server_pid, (unsigned char *)argv[2]);
 	return (0);
 }

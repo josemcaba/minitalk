@@ -28,7 +28,7 @@ SNAME_BONUS = server_bonus
 CNAME_BONUS = client_bonus
 
 SSRC = server.c ft_btoc.c
-CSRC = client.c ft_ctob.c
+CSRC = client.c
 
 SSRC_BONUS = server_bonus.c 
 CSRC_BONUS = client_bonus.c

@@ -15,24 +15,22 @@
 
 #include "minitalk.h"
 
-static void	ft_fillbits(char **bits, char *str)
+static void	ft_fillbits(char **bits, unsigned char *str)
 {
 	size_t			i;
 	int				j;
-	unsigned char	c;
 
 	i = 0;
 	while (*str)
 	{
-		c = *str;
 		j = 0;
 		while (j < 8)
 		{
-			if (c & 0x80)
+			if (*str & 0x80)
 				(*bits)[i] = '1';
 			else
 				(*bits)[i] = '0';
-			c = c << 1;
+			*str = *str << 1;
 			j++;
 			i++;
 		}
@@ -49,28 +47,6 @@ char	*ft_ctob(char *chars)
 	bits = (char *)ft_calloc(bits_len + 1, sizeof(char));
 	if (!bits)
 		return (NULL);
-	ft_fillbits(&bits, chars);
+	ft_fillbits(&bits, (unsigned char*)chars);
 	return (bits);
 }
-
-// int	main(int argc, char *argv[])
-// {
-// 	char	*bits;
-// 	char	*chars;
-
-// 	bits = ft_ctob(argv[1]);
-// 	if (!bits)
-// 		return (0);
-// 	ft_printf("%s\n", bits);
-// 	chars = ft_btoc(bits);
-// 	if (!chars)
-// 	{
-// 		free (bits);
-// 		return (0);
-// 	}
-// 	ft_printf("%s\n", chars);
-// 	ft_printf("\n");
-// 	free(bits);
-// 	free(chars);
-// 	return (0);
-// }
