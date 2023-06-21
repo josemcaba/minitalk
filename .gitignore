@@ -5,3 +5,5 @@ server.dSYM
 libft/libft.a
 server
 client
+server_bonus
+client_bonus

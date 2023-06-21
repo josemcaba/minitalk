@@ -6,7 +6,7 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 20:26:27 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/21 00:17:09 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:04:21 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ char	*ft_ctob(char *chars)
 	bits = (char *)ft_calloc(bits_len + 1, sizeof(char));
 	if (!bits)
 		return (NULL);
-	ft_fillbits(&bits, (unsigned char*)chars);
+	ft_fillbits(&bits, (unsigned char *)chars);
 	return (bits);
 }
