@@ -6,13 +6,11 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/21 02:39:07 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/23 00:57:00 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-int	g_client_pid;
 
 void	add_bit(char b)
 {
@@ -42,13 +40,12 @@ void	receive(int signal, siginfo_t *info, void *ucontext)
 	int	err;
 
 	(void)ucontext;
-	g_client_pid = info->si_pid;
 	if (signal == SIGUSR1)
 		add_bit(0);
 	if (signal == SIGUSR2)
 		add_bit(1);
 	usleep(100);
-	err = kill(g_client_pid, SIGUSR1);
+	err = kill(info->si_pid, SIGUSR1);
 	if (err)
 	{
 		ft_printf("No signal was sent\n");
@@ -58,7 +55,7 @@ void	receive(int signal, siginfo_t *info, void *ucontext)
 
 int	main(int argc, char *argv[])
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	(void)argv;
 	if (argc != 1)

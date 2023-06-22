@@ -6,7 +6,7 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/21 02:23:47 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/23 00:52:36 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ void	send_chars(pid_t pid, unsigned char *str)
 				ft_printf("No signal was sent\n");
 				exit (0);
 			}
+			pause();
+			usleep(100);
 			*str = *str << 1;
 			i++;
-			pause();
 		}
 		str++;
 	}
