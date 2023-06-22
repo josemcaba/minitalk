@@ -6,7 +6,7 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/23 00:52:36 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/23 01:41:38 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,16 @@ void	send_chars(pid_t pid, unsigned char *str)
 	}
 }
 
-pid_t	get_pid(int argc, char *argv[])
+void	server_ack(int signal)
+{
+	if (signal != SIGUSR1)
+	{
+		ft_printf("ACK server not valid\n");
+		exit (0);
+	}
+}
+
+pid_t	parse_server_pid(int argc, char *argv[])
 {
 	pid_t	server_pid;
 
@@ -58,18 +67,12 @@ pid_t	get_pid(int argc, char *argv[])
 	return (server_pid);
 }
 
-void	server_ack(int signal)
-{
-	if (signal != SIGUSR1)
-		ft_printf("ACK server not valid\n");
-}
-
 int	main(int argc, char *argv[])
 {
 	pid_t	server_pid;
 
+	server_pid = parse_server_pid(argc, argv);
 	signal(SIGUSR1, server_ack);
-	server_pid = get_pid(argc, argv);
 	send_chars(server_pid, (unsigned char *)argv[2]);
 	return (0);
 }

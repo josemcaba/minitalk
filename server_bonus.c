@@ -6,7 +6,7 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/23 00:57:00 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/23 01:34:45 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,22 @@ void	receive(int signal, siginfo_t *info, void *ucontext)
 int	main(int argc, char *argv[])
 {
 	struct sigaction	sa;
+	int					err;
 
 	(void)argv;
 	if (argc != 1)
 		return (ft_printf("Wrong number of parameter\n"), 0);
 	ft_printf("PID : %d\n", getpid());
 	sa.sa_sigaction = receive;
-	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_SIGINFO;
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
+	sigemptyset(&sa.sa_mask);
+	err = sigaction(SIGUSR1, &sa, NULL);
+	err += sigaction(SIGUSR2, &sa, NULL);
+	if (err)
+	{
+		ft_printf("Fail setting the signals handler\n");
+		return (0);
+	}
 	while (1)
 		pause();
 }

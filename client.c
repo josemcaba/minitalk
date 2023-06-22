@@ -6,7 +6,7 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/21 02:23:47 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/23 01:41:13 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	send_chars(pid_t pid, unsigned char *str)
 	}
 }
 
-pid_t	get_pid(int argc, char *argv[])
+pid_t	parse_server_pid(int argc, char *argv[])
 {
 	pid_t	server_pid;
 
@@ -61,7 +61,7 @@ int	main(int argc, char *argv[])
 {
 	pid_t	server_pid;
 
-	server_pid = get_pid(argc, argv);
+	server_pid = parse_server_pid(argc, argv);
 	send_chars(server_pid, (unsigned char *)argv[2]);
 	return (0);
 }
