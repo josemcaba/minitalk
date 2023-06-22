@@ -39,36 +39,36 @@ void	add_bit(char b)
 
 void	receive(int signal, siginfo_t *info, void *ucontext)
 {
+	int	err;
+
 	(void)ucontext;
 	g_client_pid = info->si_pid;
 	if (signal == SIGUSR1)
 		add_bit(0);
 	if (signal == SIGUSR2)
 		add_bit(1);
+	usleep(100);
+	err = kill(g_client_pid, SIGUSR1);
+	if (err)
+	{
+		ft_printf("No signal was sent\n");
+		exit (0);
+	}		
 }
 
 int	main(int argc, char *argv[])
 {
 	struct sigaction sa;
-	int err;
-	
+
 	(void)argv;
 	if (argc != 1)
 		return (ft_printf("Wrong number of parameter\n"), 0);
 	ft_printf("PID : %d\n", getpid());
 	sa.sa_sigaction = receive;
 	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_SIGINFO | SA_NODEFER;
+	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
-	{
 		pause();
-		err = kill(g_client_pid, SIGUSR1);
-		if (err)
-		{
-			ft_printf("No signal was sent\n");
-			exit (0);
-		}
-	}
 }

@@ -31,9 +31,9 @@ void	send_chars(pid_t pid, unsigned char *str)
 				ft_printf("No signal was sent\n");
 				exit (0);
 			}
-			pause();
 			*str = *str << 1;
 			i++;
+			pause();
 		}
 		str++;
 	}
@@ -60,7 +60,7 @@ pid_t	get_pid(int argc, char *argv[])
 void	server_ack(int signal)
 {
 	if (signal != SIGUSR1)
-		ft_printf("ACK server not valid\n");;
+		ft_printf("ACK server not valid\n");
 }
 
 int	main(int argc, char *argv[])
