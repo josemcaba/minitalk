@@ -31,7 +31,7 @@ void	send_chars(pid_t pid, unsigned char *str)
 				ft_printf("No signal was sent\n");
 				exit (0);
 			}
-			usleep(200);
+			usleep(250);
 			*str = *str << 1;
 			i++;
 		}

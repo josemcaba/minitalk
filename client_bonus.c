@@ -6,13 +6,11 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/21 22:22:27 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/21 02:23:47 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-int	g_server_ack;
 
 void	send_chars(pid_t pid, unsigned char *str)
 {
@@ -33,9 +31,7 @@ void	send_chars(pid_t pid, unsigned char *str)
 				ft_printf("No signal was sent\n");
 				exit (0);
 			}
-			g_server_ack = 0;
-			while (!g_server_ack)
-				pause();
+			pause();
 			*str = *str << 1;
 			i++;
 		}
@@ -43,40 +39,7 @@ void	send_chars(pid_t pid, unsigned char *str)
 	}
 }
 
-void	send_pid(pid_t pid, unsigned char *str)
-{
-	int	err;
-	int	i;
-
-	while (*str)
-	{
-		i = 0;
-		while (i < 8)
-		{
-			if (*str & 0x80)
-				err = kill(pid, SIGUSR2);
-			else
-				err = kill(pid, SIGUSR1);
-			if (err)
-			{
-				ft_printf("No signal was sent\n");
-				exit (0);
-			}
-			usleep(500);
-			*str = *str << 1;
-			i++;
-		}
-		str++;
-	}
-}
-
-void	receive_ack(int signal)
-{
-	(void)signal;
-	g_server_ack = 1;
-}
-
-pid_t	get_server_pid(int argc, char *argv[])
+pid_t	get_pid(int argc, char *argv[])
 {
 	pid_t	server_pid;
 
@@ -94,19 +57,18 @@ pid_t	get_server_pid(int argc, char *argv[])
 	return (server_pid);
 }
 
+void	server_ack(int signal)
+{
+	if (signal != SIGUSR1)
+		ft_printf("ACK server not valid\n");;
+}
+
 int	main(int argc, char *argv[])
 {
-	pid_t			server_pid;
-	unsigned char	*client_pid;
+	pid_t	server_pid;
 
-	server_pid = get_server_pid(argc, argv);
-	client_pid = (unsigned char *)ft_itoa(getpid());
-	if (!client_pid)
-		return (0);
-	send_pid(server_pid, client_pid);
-	free(client_pid);
-	g_server_ack = 0;
-	signal(SIGUSR1, receive_ack);
+	signal(SIGUSR1, server_ack);
+	server_pid = get_pid(argc, argv);
 	send_chars(server_pid, (unsigned char *)argv[2]);
 	return (0);
 }
