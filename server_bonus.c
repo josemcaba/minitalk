@@ -44,7 +44,7 @@ void	receive(int signal, siginfo_t *info, void *ucontext)
 		add_bit(0);
 	if (signal == SIGUSR2)
 		add_bit(1);
-	usleep(100);
+	usleep(150);
 	err = kill(info->si_pid, SIGUSR1);
 	if (err)
 	{
