@@ -19,8 +19,7 @@ void	add_bit(char b)
 	char		c;
 
 	bits[i] = b;
-	i++;
-	if (i == 8)
+	if (++i == 8)
 	{	
 		c = 0;
 		i--;

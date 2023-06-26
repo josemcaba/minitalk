@@ -32,7 +32,7 @@ void	send_chars(pid_t pid, unsigned char *str)
 				exit (0);
 			}
 			pause();
-			usleep(150);
+			usleep(100);
 			*str = *str << 1;
 			i++;
 		}

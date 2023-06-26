@@ -12,16 +12,23 @@
 
 #include "minitalk.h"
 
+int	g_client_pid;
+
 void	add_bit(char b)
 {
 	static char	bits[9];
 	static int	i;
 	char		c;
+	static int	prev_client_pid;
 
+	if (g_client_pid != prev_client_pid)
+	{
+		prev_client_pid = g_client_pid;
+		i = 0;
+	}
 	bits[i] = b;
-	i++;
-	if (i == 8)
-	{	
+	if (++i == 8)
+	{
 		c = 0;
 		i--;
 		while (i >= 0)
@@ -40,17 +47,18 @@ void	receive(int signal, siginfo_t *info, void *ucontext)
 	int	err;
 
 	(void)ucontext;
+	g_client_pid = info->si_pid;
 	if (signal == SIGUSR1)
 		add_bit(0);
 	if (signal == SIGUSR2)
 		add_bit(1);
-	usleep(150);
-	err = kill(info->si_pid, SIGUSR1);
+	usleep(100);
+	err = kill(g_client_pid, SIGUSR1);
 	if (err)
 	{
 		ft_printf("No signal was sent\n");
 		exit (0);
-	}		
+	}
 }
 
 int	main(int argc, char *argv[])
