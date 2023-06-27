@@ -6,7 +6,7 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/21 02:39:07 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:36:13 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	add_bit(char b)
 	char		c;
 
 	bits[i] = b;
-	if (++i == 8)
+	i++;
+	if (i == 8)
 	{	
 		c = 0;
 		i--;

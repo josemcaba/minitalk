@@ -6,7 +6,7 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/23 01:41:38 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:33:20 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	send_chars(pid_t pid, unsigned char *str)
 				exit (0);
 			}
 			pause();
-			usleep(100);
+			usleep(200);
 			*str = *str << 1;
 			i++;
 		}
