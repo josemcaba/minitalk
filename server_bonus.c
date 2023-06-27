@@ -6,7 +6,7 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/27 17:36:29 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:39:03 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	g_client_pid;
 
 void	add_bit(char b)
 {
-	static char	bits[9];
+	static char	bits[8];
 	static int	i;
 	char		c;
 	static int	prev_client_pid;
@@ -53,7 +53,7 @@ void	receive(int signal, siginfo_t *info, void *ucontext)
 		add_bit(0);
 	if (signal == SIGUSR2)
 		add_bit(1);
-	usleep(200);
+	usleep(50);
 	err = kill(g_client_pid, SIGUSR1);
 	if (err)
 	{

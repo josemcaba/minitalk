@@ -6,7 +6,7 @@
 /*   By: jocaball <jocaball@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:58:07 by jocaball          #+#    #+#             */
-/*   Updated: 2023/06/27 17:36:13 by jocaball         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:40:58 by jocaball         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	add_bit(char b)
 {
-	static char	bits[9];
+	static char	bits[8];
 	static int	i;
 	char		c;
 
